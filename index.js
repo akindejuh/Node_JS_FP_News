@@ -53,10 +53,9 @@ const Paging = async (collection, query, pipeline, startPage, limit) => {
 
 app.use("/news/:id", async (req, res) => {
   try {
-    const id = req.params?.id || "";
-    if (id) {
-      const result = await News.findById(id);
+    const result = await News.findById(req.params?.id || "");
 
+    if (result) {
       res.status(200).json({
         ok: true,
         data: result.toObject(),
