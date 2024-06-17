@@ -89,3 +89,7 @@ app.use("/news", async (req, res) => {
     });
   }
 });
+
+app.use("/", (req, res) => {
+  res.status(200).send("Welcome to FP News Server!");
+});
