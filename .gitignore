@@ -1,0 +1,20 @@
+# Third party lib
+/node_modules
+
+# vs code proj config files
+.vs
+
+# ignore logs
+logs
+*.logs
+
+# temp
+temp
+.DS_Store
+/dist
+/build
+
+.env
+.env.*
+
+test
