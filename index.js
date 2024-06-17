@@ -23,12 +23,18 @@ mongoose
     throw new Error(`MongoDB Connection Error -> ${err}`);
   });
 
-const Paging = async (collection, query, startPage, limit) => {
+const Paging = async (collection, query, pipeline, startPage, limit) => {
   const firstIndex = (startPage - 1) * limit;
 
   const [itemCount, items] = await Promise.all([
     collection.aggregate([{ $match: query }]).count("total_count"),
-    collection.aggregate([{ $match: query }, { $sort: { createdAt: -1 } }, { $skip: firstIndex }, { $limit: limit }]),
+    collection.aggregate([
+      { $match: query },
+      { $sort: { createdAt: -1 } },
+      ...pipeline,
+      { $skip: firstIndex },
+      { $limit: limit },
+    ]),
   ]);
 
   const total_page = Math.ceil(itemCount?.[0]?.total_count / limit) || 0;
@@ -74,6 +80,7 @@ app.use("/news", async (req, res) => {
     const result = await Paging(
       News,
       { title: { $regex: req.query?.search || "", $options: "i" } },
+      [{ $project: { _id: 1, title: 1, published: 1, topic: 1, imageUrl: 1, author: 1 } }],
       parseInt(req.query?.page) || 1,
       10,
     );
