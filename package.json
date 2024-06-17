@@ -4,6 +4,7 @@
   "description": "Server for FP News App",
   "main": "index.js",
   "author": "gbenga2540",
+  "repository": "https://github.com/gbenga2540/Node_JS_FP_News.git",
   "license": "MIT",
   "scripts": {
     "start": "node index.js",
