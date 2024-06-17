@@ -58,13 +58,13 @@ app.use("/news/:id", async (req, res) => {
     } else {
       res.status(400).json({
         ok: false,
-        data: "Invalid Request!",
+        msg: "Invalid Request!",
       });
     }
   } catch (error) {
     res.status(500).json({
       ok: false,
-      data: "This is on us. Our team is working to resolve this issue, thanks for your understanding.",
+      msg: "This is on us. Our team is working to resolve this issue, thanks for your understanding.",
     });
   }
 });
@@ -85,7 +85,7 @@ app.use("/news", async (req, res) => {
   } catch (error) {
     res.status(500).json({
       ok: false,
-      data: "This is on us. Our team is working to resolve this issue, thanks for your understanding.",
+      msg: "This is on us. Our team is working to resolve this issue, thanks for your understanding.",
     });
   }
 });
